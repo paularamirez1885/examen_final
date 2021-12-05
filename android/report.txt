@@ -1,0 +1,72 @@
+
+> Task :app:signingReport
+Variant: debug
+Config: debug
+Store: C:\Users\PAULAANDREARAMIREZCA\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: C9:10:C2:0F:7F:C2:44:A1:99:8B:41:36:76:31:FA:25
+SHA1: 3F:63:95:E8:19:DA:17:EC:23:BC:4F:44:4F:ED:81:11:10:D7:92:A5
+SHA-256: 58:85:15:01:CD:A2:A4:D1:05:82:D1:CD:39:DF:36:3C:D1:06:C1:86:8C:31:E6:24:9B:37:3A:DE:D1:48:AB:45
+Valid until: domingo 23 de octubre de 2050
+----------
+Variant: release
+Config: debug
+Store: C:\Users\PAULAANDREARAMIREZCA\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: C9:10:C2:0F:7F:C2:44:A1:99:8B:41:36:76:31:FA:25
+SHA1: 3F:63:95:E8:19:DA:17:EC:23:BC:4F:44:4F:ED:81:11:10:D7:92:A5
+SHA-256: 58:85:15:01:CD:A2:A4:D1:05:82:D1:CD:39:DF:36:3C:D1:06:C1:86:8C:31:E6:24:9B:37:3A:DE:D1:48:AB:45
+Valid until: domingo 23 de octubre de 2050
+----------
+Variant: profile
+Config: debug
+Store: C:\Users\PAULAANDREARAMIREZCA\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: C9:10:C2:0F:7F:C2:44:A1:99:8B:41:36:76:31:FA:25
+SHA1: 3F:63:95:E8:19:DA:17:EC:23:BC:4F:44:4F:ED:81:11:10:D7:92:A5
+SHA-256: 58:85:15:01:CD:A2:A4:D1:05:82:D1:CD:39:DF:36:3C:D1:06:C1:86:8C:31:E6:24:9B:37:3A:DE:D1:48:AB:45
+Valid until: domingo 23 de octubre de 2050
+----------
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\PAULAANDREARAMIREZCA\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: C9:10:C2:0F:7F:C2:44:A1:99:8B:41:36:76:31:FA:25
+SHA1: 3F:63:95:E8:19:DA:17:EC:23:BC:4F:44:4F:ED:81:11:10:D7:92:A5
+SHA-256: 58:85:15:01:CD:A2:A4:D1:05:82:D1:CD:39:DF:36:3C:D1:06:C1:86:8C:31:E6:24:9B:37:3A:DE:D1:48:AB:45
+Valid until: domingo 23 de octubre de 2050
+----------
+Variant: debugUnitTest
+Config: debug
+Store: C:\Users\PAULAANDREARAMIREZCA\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: C9:10:C2:0F:7F:C2:44:A1:99:8B:41:36:76:31:FA:25
+SHA1: 3F:63:95:E8:19:DA:17:EC:23:BC:4F:44:4F:ED:81:11:10:D7:92:A5
+SHA-256: 58:85:15:01:CD:A2:A4:D1:05:82:D1:CD:39:DF:36:3C:D1:06:C1:86:8C:31:E6:24:9B:37:3A:DE:D1:48:AB:45
+Valid until: domingo 23 de octubre de 2050
+----------
+Variant: releaseUnitTest
+Config: debug
+Store: C:\Users\PAULAANDREARAMIREZCA\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: C9:10:C2:0F:7F:C2:44:A1:99:8B:41:36:76:31:FA:25
+SHA1: 3F:63:95:E8:19:DA:17:EC:23:BC:4F:44:4F:ED:81:11:10:D7:92:A5
+SHA-256: 58:85:15:01:CD:A2:A4:D1:05:82:D1:CD:39:DF:36:3C:D1:06:C1:86:8C:31:E6:24:9B:37:3A:DE:D1:48:AB:45
+Valid until: domingo 23 de octubre de 2050
+----------
+Variant: profileUnitTest
+Config: debug
+Store: C:\Users\PAULAANDREARAMIREZCA\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: C9:10:C2:0F:7F:C2:44:A1:99:8B:41:36:76:31:FA:25
+SHA1: 3F:63:95:E8:19:DA:17:EC:23:BC:4F:44:4F:ED:81:11:10:D7:92:A5
+SHA-256: 58:85:15:01:CD:A2:A4:D1:05:82:D1:CD:39:DF:36:3C:D1:06:C1:86:8C:31:E6:24:9B:37:3A:DE:D1:48:AB:45
+Valid until: domingo 23 de octubre de 2050
+----------
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 7.0.
+Use '--warning-mode all' to show the individual deprecation warnings.
+See https://docs.gradle.org/6.7/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed
