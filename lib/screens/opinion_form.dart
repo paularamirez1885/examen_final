@@ -8,6 +8,7 @@ import 'package:examen_final/models/token.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
+import 'package:email_validator/email_validator.dart';
 
 class OpinionForm extends StatefulWidget {
   final Token token;
@@ -32,13 +33,34 @@ class _OpinionFormState extends State<OpinionForm> {
   final formController = TextEditingController();
   bool _showLoader = true;
   bool _edit = false;
+
   int id = 0;
   String date = '';
+  
   String email = '';
+  String emailError ='';
+  bool emailShowError = false;
+  TextEditingController emailController = TextEditingController();
+
   double qualification = 0;
+  String qualificationError ='';
+  bool qualificationShowError = false;
+  TextEditingController qualificationController = TextEditingController();
+
   String theBest = '';
+  String theBestError ='';
+  bool theBestShowError = false;
+  TextEditingController theBestController = TextEditingController();
+
   String theWorst = '';
+  String theWorstError ='';
+  bool theWorstShowError = false;
+  TextEditingController theWorstController = TextEditingController();
+
   String remarks = '';
+  String remarksError ='';
+  bool remarksShowError = false;
+  TextEditingController remarksController = TextEditingController();
 
   @override
   void dispose() {
@@ -76,22 +98,38 @@ class _OpinionFormState extends State<OpinionForm> {
               Text("Califica el curso"),
               _ratingBar(),
               new TextFormField(
+                  controller: emailController,
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (valor) => email = valor,
                   decoration: new InputDecoration(
-                      hintText: 'you@example.com', labelText: email)),
+                      hintText: 'you@example.com', 
+                      labelText: email,
+                      errorText: emailShowError ? emailError : null,
+                  )),
               new TextFormField(
+                  controller: theBestController,
                   onChanged: (valor) => theBest = valor,
                   decoration: new InputDecoration(
-                      hintText: 'Lo que más te gustó', labelText: theBest)),
+                      hintText: 'Lo que más te gustó', 
+                      labelText: theBest,
+                      errorText: theBestShowError ? theBestError : null,
+                  )),
               new TextFormField(
+                  controller: theWorstController,
                   onChanged: (valor) => theWorst = valor,
                   decoration: new InputDecoration(
-                      hintText: 'Lo que menos te gustó', labelText: theWorst)),
+                      hintText: 'Lo que menos te gustó', 
+                      labelText: theWorst,
+                      errorText: theWorstShowError ? theWorstError : null,
+                  )),
               new TextFormField(
+                  controller: remarksController,
                   onChanged: (valor) => remarks = valor,
                   decoration: new InputDecoration(
-                      hintText: 'Comentarios', labelText: remarks)),
+                      hintText: 'Comentarios', 
+                      labelText: remarks,
+                      errorText: remarksShowError ? remarksError : null,
+                  )),
               new Container(
                 width: screenSize.width,
                 child: new ElevatedButton(
@@ -135,6 +173,60 @@ class _OpinionFormState extends State<OpinionForm> {
       width: 30.0,
       color: Colors.amber,
     );
+  }
+
+  bool validateFileds() {
+    bool isValid = true;
+    if (email.isEmpty) {
+      isValid = false;
+    }
+    else if(!EmailValidator.validate(email)){
+      isValid = false;
+      emailShowError = true;
+      emailError = 'Debes ingresar un email válido';
+    }
+    else if(!email.contains('correo.itm.edu')){
+      isValid = false;
+      emailShowError = true;
+      emailError = 'El correo debe ser de dominio del itm';
+    }
+    else{
+      emailShowError = false;
+    }
+
+    if(qualification <= 0){
+      isValid = false;
+      showAlertDialog(
+        context: context,
+        title: 'Error', 
+        message: 'Debes seleccionar una calificación entre 1 y 5',
+        actions: <AlertDialogAction>[
+            AlertDialogAction(key: null, label: 'Aceptar'),
+        ]
+      );    
+    }
+
+    if(theBest.isEmpty){
+      isValid = false;
+      theBestError = "Debes ingresar una opinión positiva";
+      theBestShowError = true;
+    }
+
+    if(theWorst.isEmpty){
+      isValid = false;
+      theWorstShowError = true;
+      theWorstError = "Debe ingresar una opinión negativa";
+    }
+
+    if(remarks.isEmpty){
+      isValid = false;
+      remarksShowError = true;
+      remarksError = "Por favor ingresa una sugerencia";
+    }
+
+    setState(() { });
+
+    return isValid;
   }
 
   void initState() {
@@ -201,39 +293,53 @@ class _OpinionFormState extends State<OpinionForm> {
   }
 
   saveFormInfo() async {
-    var url = Uri.parse('https://vehicleszulu.azurewebsites.net/api/Finals');
-      Map<String, dynamic> request = {
-        'email': email,
-        'qualification': qualification.toInt(),
-        'theBest': theBest,
-        'theWorst': theWorst,
-        'remarks': remarks,
-      };
-      var bodyRequest = jsonEncode(request);
-      var response = await http.post(
-        url,
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-          'authorization': 'bearer ${_token.token}'
-        },
-        body: bodyRequest,
-      );
-      print(response.body);
+    if (!validateFileds()) {
+      return;
+    }
 
-      if (response.statusCode >= 400) {
-        print(response);
-        await showAlertDialog(
-            context: context,
-            title: 'Error',
-            message: response.body,
-            actions: <AlertDialogAction>[
-              AlertDialogAction(key: null, label: 'Aceptar'),
-            ]);
-        return;
-      }
-      var body = response.body;
-      var decodedJson = jsonDecode(body);
-      print(decodedJson);
-    } 
+    print(validateFileds());
+
+    var url = Uri.parse('https://vehicleszulu.azurewebsites.net/api/Finals');
+    Map<String, dynamic> request = {
+      'email': email,
+      'qualification': qualification.toInt(),
+      'theBest': theBest,
+      'theWorst': theWorst,
+      'remarks': remarks,
+    };
+    var bodyRequest = jsonEncode(request);
+    var response = await http.post(
+      url,
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        'authorization': 'bearer ${_token.token}'
+      },
+      body: bodyRequest,
+    );
+    print(response.body);
+
+    if (response.statusCode >= 400) {
+      print(response);
+      await showAlertDialog(
+          context: context,
+          title: 'Error',
+          message: response.body,
+          actions: <AlertDialogAction>[
+            AlertDialogAction(key: null, label: 'Aceptar'),
+          ]);
+      return;
+    } else {
+      await showAlertDialog(
+          context: context,
+          title: 'Registro exitoso',
+          message: "Gracias por su opinión, los datos fueron guardados",
+          actions: <AlertDialogAction>[
+            AlertDialogAction(key: null, label: 'Aceptar'),
+          ]);
+    }
+    var body = response.body;
+    var decodedJson = jsonDecode(body);
+    print(decodedJson);
+  }
 }

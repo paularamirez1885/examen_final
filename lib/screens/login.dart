@@ -42,8 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 20,),
               _showEmail(),
               _showPassword(),
-              _showRememberme(),
-              _showButtons()
+              // _showRememberme(),
+              _showButtons(),
+              _showLoader ? LoaderComponent(text: 'Por favor espere...',) : Container(),
             ],
           )
         )      
@@ -119,38 +120,38 @@ class _LoginScreenState extends State<LoginScreen> {
      margin: EdgeInsets.only(left: 10, right: 10),
      child: Column(
        children: [
-       Row(
-       mainAxisAlignment: MainAxisAlignment.spaceAround,
-       children:<Widget> [
-         Expanded(
-           child: ElevatedButton(
-             child: Text('Ingresar'),
-             style: ButtonStyle(
-               backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                 (Set<MaterialState> states){
-                   return Color(0xFFff64af);
-                 }
-               ),
-             ),
-             onPressed: () => _login(),
-           ),
-         ),
-         SizedBox(width: 20,),
-         Expanded(
-           child: ElevatedButton(
-             style: ButtonStyle(
-               backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                 (Set<MaterialState> states){
-                   return Color(0xFF32c2c8);
-                 }
-               ),
-             ),
-             child: Text('Registrarme'),
-             onPressed: () {},
-           ),
-         ),
-       ],
-      ),
+      //  Row(
+      //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //  children:<Widget> [
+      //    Expanded(
+      //      child: ElevatedButton(
+      //        child: Text('Ingresar'),
+      //        style: ButtonStyle(
+      //          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+      //            (Set<MaterialState> states){
+      //              return Color(0xFFff64af);
+      //            }
+      //          ),
+      //        ),
+      //        onPressed: () => _login(),
+      //      ),
+      //    ),
+      //    SizedBox(width: 20,),
+      //    Expanded(
+      //      child: ElevatedButton(
+      //        style: ButtonStyle(
+      //          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+      //            (Set<MaterialState> states){
+      //              return Color(0xFF32c2c8);
+      //            }
+      //          ),
+      //        ),
+      //        child: Text('Registrarme'),
+      //        onPressed: () {},
+      //      ),
+      //    ),
+      //  ],
+      // ),
       _showGoogleButton(),
       ],
     )
@@ -174,7 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
             )
           )
         ),
-          _showLoader ? LoaderComponent(text: 'Por favor espere...',) : Container(),
       ],
    );
  }
@@ -217,9 +217,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
    void _loginGoogle() async {
-     setState(() {
-      _showLoader = true;
-    });
+    //  setState(() {
+    //   _showLoader = true;
+    // });
      var googleSignIn = GoogleSignIn();
      await googleSignIn.signOut();
      var user = await googleSignIn.signIn();
@@ -244,9 +244,9 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       body: bodyRequest,
     );
-    setState(() {
-      _showLoader = false;
-    });
+    // setState(() {
+    //   _showLoader = false;
+    // });
 
     if(response.statusCode >= 400) {
       await showAlertDialog(
